@@ -12,7 +12,7 @@ import { List, ListItemButton, ListItemText, Typography } from '@mui/material';
 import axios from 'axios';
 
 export default function Shome() {
-    
+
     const navigate=useNavigate();
 
     const [user, setUser] = useState("");

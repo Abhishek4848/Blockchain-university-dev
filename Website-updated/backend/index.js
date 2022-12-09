@@ -44,8 +44,11 @@ app.get('/fetchcourses',(req,res)=>{
 
 app.get('/fetchcertificates',(req,res)=>{
     database.db.collection('certificates').find({}).toArray((err,result)=>{
-        if(err) throw err
-        res.send(result)
+        if(err){
+            console.log(err)
+            res.send({})}
+        else{
+        res.send(result)}
     })
 })
 

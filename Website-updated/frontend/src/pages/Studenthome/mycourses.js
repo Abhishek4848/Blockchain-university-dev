@@ -25,14 +25,14 @@ export default function Mcourse() {
 
     const postname=()=>{
         const ee={ se:user.name };
-        axios.post('http://localhost:8080/fetchmycourses/postn',ee)
+        axios.post('http://localhost:8050/fetchmycourses/postn',ee)
             .then(res=>{
                 console.log("yaya")
             })
     }
     const getcourses=()=>{
         postname();
-        axios.get('http://localhost:8080/fetchmycourses/getc')
+        axios.get('http://localhost:8050/fetchmycourses/getc')
             .then(res=>{
                 setCourses(res.data)
             })

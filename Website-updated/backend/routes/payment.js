@@ -20,7 +20,7 @@ router.post("/orders", async (req, res) => {
 				console.log(error);
 				return res.status(500).json({ message: "Something Went Wrong!" });
 			}
-			res.status(200).json({ data: order });
+			res.send(order);
 		});
 	} catch (error) {
 		res.status(500).json({ message: "Internal Server Error!" });
