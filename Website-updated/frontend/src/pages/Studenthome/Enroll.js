@@ -5,8 +5,9 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import getCurrentUser from '../Courses/Getcourse';
 import { useEffect,useState } from 'react';
-
 export default function Enroll({item}) {
+
+	
 
 	const [user, setUser] = useState("");
 
@@ -14,9 +15,11 @@ export default function Enroll({item}) {
         setUser(getCurrentUser());
     }, []);
 
+	const detail={name:item.name,se:user.name};
+
     const initPayment = (data) => {
 		const options = {
-			key: "rzp_test_EVMis0D9Qiegv4",
+			key: "rzp_test_Ts1ONCToJJ8jvM",
 			amount: data.amount,
 			currency: data.currency,
 			name: item.name,
@@ -27,7 +30,13 @@ export default function Enroll({item}) {
 				try {
 					const verifyUrl = "http://localhost:8050/payment/verify";
 					const { data } = await axios.post(verifyUrl, response);
-					console.log(data);
+					axios.post("http://localhost:8050/enroll/store", detail)
+            			.then(res=>{
+                			window.alert(res.data.message)
+            			})
+            			.catch(err=>{
+                			console.log(err)
+            			})
 				} catch (error) {
 					console.log(error);
 				}
@@ -39,18 +48,26 @@ export default function Enroll({item}) {
 		const rzp1 = new window.Razorpay(options);
 		rzp1.open();
 	};
-
 	const handlePayment = async () => {
 		try {
-			const orderUrl = "http://localhost:8050/payment/orders";
-			const { data } = await axios.post(orderUrl, { amount: item.fee });
-			console.log(data);
-			initPayment(data.data);
-			const detail={name:item.name,se:user.name};
-			axios.post("http://localhost:8050/enroll", detail)
-            .then( res => {
-                window.alert(res.data.message)
+			var cc
+			axios.post("http://localhost:8050/enroll/check", detail)
+            .then(res=>{
+                if(res.data){
+					window.alert("You have already enrolled for this course")
+				}
+				else
+				{
+					axios.post("http://localhost:8050/payment/orders", { amount: item.fee })
+					.then(res=>{
+					console.log(res.data);
+					initPayment(res.data);
+					})
+				}
             })
+            .catch(err=>{
+                console.log(err)
+            })	
 		} catch (error) {
 			console.log(error);
 		}

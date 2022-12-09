@@ -5,11 +5,11 @@ const dotenv=require('dotenv')
 const mongoose=require('mongoose')
 dotenv.config();
 const userRoutes=require('./routes/users');
-const mycourseRoutes=require('./routes/mycourse')
 const enrollRoutes=require('./routes/enroll')
 const authRoutes=require('./routes/auth');
 const courseRoutes=require('./routes/courses')
 const paymentRoutes=require('./routes/payment')
+const mycourseRoutes=require('./routes/mycourse')
 
 var database
 
@@ -32,7 +32,7 @@ app.use("/register",userRoutes);
 app.use("/login",authRoutes);
 app.use("/courses",courseRoutes);
 app.use("/payment/",paymentRoutes)
-app.use("/enroll",enrollRoutes);
+app.use("/enroll/",enrollRoutes);
 app.use("/fetchmycourses/",mycourseRoutes);
 
 app.get('/fetchcourses',(req,res)=>{
@@ -44,8 +44,11 @@ app.get('/fetchcourses',(req,res)=>{
 
 app.get('/fetchcertificates',(req,res)=>{
     database.db.collection('certificates').find({}).toArray((err,result)=>{
-        if(err) throw err
-        res.send(result)
+        if(err){
+            console.log(err)
+            res.send({})}
+        else{
+        res.send(result)}
     })
 })
 

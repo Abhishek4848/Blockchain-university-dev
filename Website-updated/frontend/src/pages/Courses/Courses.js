@@ -1,8 +1,8 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState,useEffect } from 'react';
+import jwtDecode from 'jwt-decode';
 import '../../assets/css/main.css'
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import getCurrentUser from './Getcourse';
 import Customcard from './Customcard';
 import Newcourse from './Newcourse';
@@ -10,10 +10,11 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
+import axios from 'axios';
 import { List, ListItemButton, ListItemText, Typography } from '@mui/material';
 
 export default function Courses() {
-    
+
     const [user, setUser] = useState("");
 
     useEffect(() => {
@@ -102,16 +103,17 @@ const[tcourse,setTcourse]=React.useState('')
               </header>
               <Newcourse onSubmit={handleAddc}/>
               <p>{getcourses()}</p>
-              <Grid container spacing={3} className="grid">
-            {(tcourse.length === 0)?(
-            <div className='align-center'>
-                <Typography variant='h2' component='p' style={{textAlign:'center'}}></Typography>
-            </div>):
-              tcourse.map((item)=>(
-                <Grid item md={4} sm={6} xs={12}>
-                    <Customcard item={item}/>
-                </Grid>))}
-              </Grid>
+                  <Grid container spacing={3} className="grid">
+                    {(tcourse.length === 0)?(
+                        <div className='align-center'>
+                            <Typography variant='h2' component='p' style={{textAlign:'center'}}></Typography>
+                        </div>):
+                        tcourse.map((item)=>(
+                        <Grid item md={4} sm={6} xs={12}>
+                            <Customcard item={item}/>
+                        </Grid>))}
+                </Grid>
+             
             </section>
      
           <footer id="footer">

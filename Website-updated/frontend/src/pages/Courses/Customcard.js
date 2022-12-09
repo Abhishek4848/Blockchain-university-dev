@@ -5,18 +5,18 @@ import View from './View';
 
 const Customcard=({item})=> {
   return (
-    <div class="card">
-    <div class="card-img">
-      <p>Students :{item.se}</p>
+    <div className="card">
+    <div className="card-img">
+      <p className="txt-st">Students :{item.se}</p>
     </div>
-    <div class="card-info">
-      <p class="text-title">{item.name} </p>
-      <p class="text-body">{item.category}</p>
-      <p class="text-body">Course by : {item.cby}</p>
+    <div className="card-info">
+      <p className="text-title">{item.name} </p>
+      <p className="text-body">{item.category}</p>
+      <p className="text-body">Course by : {item.cby}</p>
     </div>
-    <div class="card-footer">
-    <span class="text-title">INR{item.fee}</span>
-    <div class="card-button">
+    <div className="card-footer">
+    <span className="text-title">INR{item.fee}</span>
+    <div className="card-button">
       <View item={item}/>
     </div>
   </div></div>
