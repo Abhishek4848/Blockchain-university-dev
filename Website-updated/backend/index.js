@@ -32,7 +32,7 @@ app.use("/register",userRoutes);
 app.use("/login",authRoutes);
 app.use("/courses",courseRoutes);
 app.use("/payment/",paymentRoutes)
-app.use("/enroll",enrollRoutes);
+app.use("/enroll/",enrollRoutes);
 app.use("/fetchmycourses/",mycourseRoutes);
 
 app.get('/fetchcourses',(req,res)=>{
