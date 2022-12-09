@@ -5,11 +5,11 @@ const dotenv=require('dotenv')
 const mongoose=require('mongoose')
 dotenv.config();
 const userRoutes=require('./routes/users');
-const mycourseRoutes=require('./routes/mycourse')
 const enrollRoutes=require('./routes/enroll')
 const authRoutes=require('./routes/auth');
 const courseRoutes=require('./routes/courses')
 const paymentRoutes=require('./routes/payment')
+const mycourseRoutes=require('./routes/mycourse')
 
 var database
 
